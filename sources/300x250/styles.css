@@ -1,0 +1,170 @@
+*,
+html,
+body {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: #FFFFFF;
+    font-family: 'Roboto', 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    color: #494d53;
+}
+
+div {
+    position: absolute;
+}
+
+/* Sizing */
+#adwrapper,
+#content {
+    width: 300px;
+    height: 250px;
+}
+
+#adwrapper {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+#content,
+img {
+    position: absolute;
+}
+
+#content {
+    background-color: #F1F1F1;
+}
+
+#border {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border: 1px solid #494d53;
+    z-index: 999;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.wrapper-car {
+    width: 300px;
+    height: 137px;
+    overflow: hidden;
+}
+
+#car {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+#volvo-text{
+    width:100px;
+    height:8px;
+    top:16px;
+    left:101px;
+}
+#volvologo {
+    bottom: 30px;
+    right: 25px;
+    width: 50px;
+}
+
+#heading1  {
+  left: 52px;
+  top: 150px;
+  width: 192px;
+  height:31px;
+}
+
+#tag2, #tag3 {
+    top: 181px;
+    text-align: center;
+    width: 300px;
+    font-size: 11.5px;
+    line-height: 1em;
+}
+
+#dealerName {
+    top: 200px;
+    font-size: 9px;
+    width: 118px;
+    padding: 4px 10px;
+    border: 1px solid #404040;
+    text-align: center;
+}
+
+#terms {
+    bottom: 5px;
+    color: #53585f;
+    text-align: center;
+    width: 100%;
+    font-size: 9px;
+
+}
+#gradient {
+    position:absolute;
+    top:0;
+}
+
+#booktestdrive1 {
+    left: 81px;
+    top: 190px;
+    width: 116px;
+    padding: 6px 10px;
+    border: 1px solid #404040;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+}
+#booktestdrive2 {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 195px;
+    width: 110px;
+    padding: 6px 10px;
+    border: 1px solid #404040;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+/* Hide All */
+#content,
+.text,
+#booktestdrive,
+img {
+    opacity: 0;
+}
+
+.visible{
+    opacity:1;
+}
+
+#loader {
+    margin:auto;position:absolute;top:0;left:0;bottom:0;right:0; /* horizontal and vertical center */
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #999; /* Dark Grey */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 2s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    transform: translateZ(0);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.show{
+    visibility: visible;
+}
+.hide{
+    visibility: hidden;
+}

@@ -1,0 +1,154 @@
+*,
+html,
+body {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: #FFFFFF;
+    font-family: 'Roboto', 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    color: #494d53;
+}
+
+div {
+    position: absolute;
+}
+
+/* Sizing */
+#adwrapper,
+#content {
+    width: 300px;
+    height: 50px;
+}
+
+#adwrapper {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+#content,
+img {
+    position: absolute;
+}
+
+#content {
+    background-color: #F1F1F1;
+}
+
+#border {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border: 1px solid #494d53;
+    z-index: 999;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.wrapper-car {
+    width: 142px;
+    height: 50px;
+    overflow: hidden;
+}
+
+#car {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+#volvo {
+    bottom: 0px;
+    right: 0px;
+    width: 300px;
+}
+
+#copy1  {
+  left: 160px;
+  top: 20px;
+  width: 126px;
+}
+
+#copy2, #copy3  {
+    color: #494d53;
+    font-size: 8px;
+    line-height: 1.2em;
+    left: auto;
+    right: 0;
+    text-align: center;
+    top: 15px;
+    width: 158px;
+  
+}
+
+#terms {
+    bottom: 2px;
+    left: auto;
+    right: 0;
+    width: 158px;
+    text-align: center;
+    font-size: 5.8px;
+    color: #53585f;
+}
+
+#booktestdrive1,
+#booktestdrive2 {
+    border-width: 1px;
+    border-color: rgb(73, 77, 83);
+    border-style: solid;
+    color: #494d53;
+    font-size: 9px;
+    font-weight: bolder;
+    padding: 1px 0px 1px;
+    position: absolute;
+    left: 171px;
+    top: 16px;
+    text-align: center;
+    width: 95px;
+}
+#booktestdrive1 {
+    left:173px;
+}
+
+
+/* Hide All */
+#content,
+.text,
+#booktestdrive,
+img {
+    opacity: 0;
+}
+
+.visible{
+    opacity:1;
+}
+
+#loader {
+    margin:auto;position:absolute;top:0;left:0;bottom:0;right:0; /* horizontal and vertical center */
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #999; /* Dark Grey */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 2s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    transform: translateZ(0);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.show{
+    visibility: visible;
+}
+.hide{
+    visibility: hidden;
+}
