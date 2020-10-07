@@ -8,4 +8,6 @@ Auto-package banners.
 
 NB:
 Under head tag, put below comment code, it will auto-inject meta ad.size:
+```
 <!--AD.SIZE-->
+```
