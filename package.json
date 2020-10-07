@@ -14,5 +14,10 @@
     "gulp-webshot": "^0.2.3",
     "gulp-zip": "^5.0.2",
     "gulp-rename": "^2.0.0"
+  },
+  "dependencies": {
+    "gulp-clean": "^0.4.0",
+    "gulp-replace": "^1.0.0",
+    "image-size": "^0.9.1"
   }
 }
