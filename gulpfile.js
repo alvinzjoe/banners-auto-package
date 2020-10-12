@@ -10,6 +10,7 @@ Auto-package banners.
 NB:
 Under head tag, put below comment code, it will auto-inject meta ad.size:
 <!--AD.SIZE-->
+If you want to capture specific size, use "gulp webshot --300x600"
 */
 
 var gulp = require("gulp"),
@@ -24,11 +25,11 @@ var sizeOf = require("image-size");
 var clean = require('gulp-clean');
 const { dir } = require("console");
 
-var zipName = "JOBNUMBER_DCM";
+var zipName = "VOLAWG0922_Dealer_DCM";
 
-var scriptsPath = "./sources";
+var scriptsPath = "./sources/Dealer/DCM";
 var generatedPath = "./dist/generated";
-var backupImagePath = "./sources/backup";
+var backupImagePath = scriptsPath+"/backup";
 var webshotImagePath = "./dist/shot";
 var webshotQuality = 80;
 var minifiedImagesPath = "./dist/minified";
@@ -42,9 +43,32 @@ gulp.task('do:clean', function () {
     .pipe(clean({force: true}));
 });
 
-gulp.task("webshot", function () {
+gulp.task('do:clean-zip', function () {
+  return gulp.src([distPath+'/**.zip',])
+    .pipe(clean({force: true}));
+});
+
+gulp.task("webshot", function (done) {
+  var option = process.argv[3]; //set to '123'
+  if(option) {
+    var size = option.substr(2);
+    dir_html = scriptsPath + "/"+size+"/";
+    if (fs.existsSync(dir_html)) {
+      console.log('Start capturing');
+      return shot(size);
+    } else {
+      console.log('dir doesnt exists');
+      done();
+    }
+  } else {
+    return shot();
+  }
+  
+});
+function shot(size){
+  size = typeof size !== 'undefined' ? size : '**';
   return gulp
-    .src([scriptsPath + "/**/**.html", "!./node_modules/**/**.html"])
+    .src([scriptsPath + "/"+size+"/**.html", "!./node_modules/**/**.html"])
     .pipe(
       webshot({
         dest: webshotImagePath,
@@ -55,13 +79,15 @@ gulp.task("webshot", function () {
         captureSelector: bannerSelector,
       })
     );
-});
+}
+
 gulp.task("minify", function () {
   return gulp
     .src([webshotImagePath + "/**/**"])
     .pipe(imagemin({ optimizationLevel: 5 }))
     .pipe(gulp.dest(minifiedImagesPath));
 });
+
 gulp.task("do:rename", function (done) {
   var folders = getFolders(scriptsPath);
   tasks = folders.map(function (folder) {
@@ -74,10 +100,15 @@ gulp.task("do:rename", function (done) {
   });
   done();
 });
+
 gulp.task("to-generated", function (done) {
-  return gulp.src([scriptsPath+'/**'])
+  setTimeout(function () {
+    gulp.src([scriptsPath+'/**'])
         .pipe(gulp.dest(generatedPath));
+    done();
+  }, 2000);
 });
+
 gulp.task("inject-meta-ad-size", function (done) {
   setTimeout(function () {
   var folders = getFolders(scriptsPath);
@@ -98,24 +129,26 @@ gulp.task("inject-meta-ad-size", function (done) {
 });
 
 gulp.task("do:zip", function (done) {
-  var folders = getFolders(generatedPath);
-  tasks = folders.map(function (folder) {
-    return gulp
-      .src([generatedPath + "/" + folder + "/*"], { base: generatedPath })
-      .pipe(zip(folder + ".zip"))
-      .pipe(gulp.dest(distPath));
-  });
-  done();
+  setTimeout(function () {
+    var folders = getFolders(generatedPath);
+    tasks = folders.map(function (folder) {
+      gulp
+        .src([generatedPath + "/" + folder + "/*"], { base: generatedPath })
+        .pipe(zip(folder + ".zip"))
+        .pipe(gulp.dest(distPath));
+    });
+    done();
+  }, 2000);
 });
 
 gulp.task("do:zip2", function (done) {
   setTimeout(function () {
-    return gulp
+    gulp
       .src([distPath + "/*.zip"])
       .pipe(zip(zipName + ".zip"))
       .pipe(gulp.dest(distPath));
+      done();
   }, 2000);
-  done();
 });
 
 function getFolders(dir) {
@@ -123,6 +156,10 @@ function getFolders(dir) {
     return fs.statSync(path.join(dir, file)).isDirectory();
   });
 }
+
+// gulp.task('mytask', function(done) {
+  
+// });
 
 /* 
 1. Webshot
@@ -134,4 +171,14 @@ function getFolders(dir) {
 gulp.task(
   "process",
   gulp.series("do:clean", "webshot", "minify", "do:rename", "to-generated","inject-meta-ad-size", "do:zip", "do:zip2")
+);
+
+gulp.task(
+  "backup-image",
+  gulp.series("webshot", "minify", "do:rename")
+);
+
+gulp.task(
+  "zipping",
+  gulp.series("do:clean-zip", "to-generated",  "do:zip", "do:zip2")
 );
