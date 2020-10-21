@@ -25,10 +25,11 @@ var sizeOf = require("image-size");
 var clean = require('gulp-clean');
 const { dir } = require("console");
 
-var zipName = "VOLAWG0922_Dealer_DCM";
-
+var zipName = "VOLAWG0911_Dealer_DCM";
+// DCM DCS
 var scriptsPath = "./sources/Dealer/DCM";
 var generatedPath = "./dist/generated";
+//var generatedPath = scriptsPath;
 var backupImagePath = scriptsPath+"/backup";
 var webshotImagePath = "./dist/shot";
 var webshotQuality = 80;
@@ -103,7 +104,7 @@ gulp.task("do:rename", function (done) {
 
 gulp.task("to-generated", function (done) {
   setTimeout(function () {
-    gulp.src([scriptsPath+'/**'])
+    gulp.src([scriptsPath+'/**/**'])
         .pipe(gulp.dest(generatedPath));
     done();
   }, 2000);
@@ -133,7 +134,7 @@ gulp.task("do:zip", function (done) {
     var folders = getFolders(generatedPath);
     tasks = folders.map(function (folder) {
       gulp
-        .src([generatedPath + "/" + folder + "/*"], { base: generatedPath })
+        .src([generatedPath + "/" + folder + "/**/**"], { base: generatedPath })
         .pipe(zip(folder + ".zip"))
         .pipe(gulp.dest(distPath));
     });
@@ -181,4 +182,9 @@ gulp.task(
 gulp.task(
   "zipping",
   gulp.series("do:clean-zip", "to-generated",  "do:zip", "do:zip2")
+);
+
+gulp.task(
+  "zipping-simple",
+  gulp.series("do:clean-zip", "do:zip", "do:zip2")
 );
