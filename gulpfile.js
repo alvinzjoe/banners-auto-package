@@ -11,6 +11,9 @@ NB:
 Under head tag, put below comment code, it will auto-inject meta ad.size:
 <!--AD.SIZE-->
 If you want to capture specific size, use "gulp webshot --300x600"
+* DCM: Backup image on folder 'backup'
+* DCS: Backup image on each folder size
+* Max backup image: 30kb
 */
 
 var gulp = require("gulp"),
@@ -25,10 +28,10 @@ var sizeOf = require("image-size");
 var clean = require('gulp-clean');
 const { dir } = require("console");
 
-var zipName = "VOLAWG0911_Dealer_DCM";
+var zipName = "VOLAWG0930_FamilySafety_Dealer_DCM";
 // DCM DCS
-var scriptsPath = "./sources/Dealer/DCM";
-var generatedPath = "./dist/generated";
+var scriptsPath = "./sources/Family Safety/Dealer/DCM";
+var generatedPath = "./sources/Family Safety/Dealer/DCM";
 //var generatedPath = scriptsPath;
 var backupImagePath = scriptsPath+"/backup";
 var webshotImagePath = "./dist/shot";
