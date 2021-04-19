@@ -13,6 +13,7 @@ Under head tag, put below comment code, it will auto-inject meta ad.size:
 If you want to capture specific size, use "gulp webshot --300x600"
 * DCM: Backup image on folder 'backup'
 * DCS: Backup image on each folder size
+* SIZMEK: Backup image on each folder size
 * Max backup image: 30kb
 */
 
