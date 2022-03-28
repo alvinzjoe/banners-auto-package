@@ -1,4 +1,4 @@
-# gulp for auto-package for AD banners
+# gulp auto-package for AD banners
 
 1. Put your work folder under './sources' (Sources > 160x600, 300x50, etc) 
 2. Change variable zipName to your preference Package Name ( JOBNUMBER_DCM ) 
